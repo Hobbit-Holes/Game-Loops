@@ -86,6 +86,11 @@ void update() {
     player_x += player_speed * delta_time;
     player_y += player_speed * delta_time;
 
+    if (player_x < width && player_y < height) {
+        player_x = width / 2;
+        player_y = height / 2;
+    }
+
     last_frame_time = SDL_GetTicks();
 }
 
