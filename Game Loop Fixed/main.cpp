@@ -9,12 +9,19 @@ SDL_Window* window;
 SDL_Renderer* renderer;
 SDL_Event sdl_event;
 
+int height = 400;
+int width = 600;
+
 bool game_running = false;
 int last_frame_time = 0;
 
-int player_x = 0;
-int player_y = 0;
+// Player
+int player_x = width / 2;
+int player_y = height / 2;
 int player_speed = 200;
+
+int direction_x = 1;
+int direction_y = 1;
 
 // SCREEN
 bool graphics_initialization(int width, int height) {
@@ -25,7 +32,7 @@ bool graphics_initialization(int width, int height) {
 
     // Characteristics of the window
     window = SDL_CreateWindow(
-        "Game Loop Variable",
+        "Game Loop Fixed",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
         width,
@@ -78,14 +85,31 @@ void process_input(bool *game_is_running) {
     }
 }
 
+// RESET PLAYER
+void reset_player() {
+    player_x = width / 2;
+    player_y = height / 2;
+
+    direction_x = (rand() % 3) - 1;
+    direction_y = (rand() % 3) - 1;
+
+    if (direction_x == 0 && direction_y == 0) {
+        direction_y = 1;
+    }
+}
+
 // UPDATE PLAYER POSITION
 void update() {
     int delta_time_ms = SDL_GetTicks() - last_frame_time;
     float delta_time = delta_time_ms / 1000.0f;
 
-    player_x += player_speed * delta_time;
-    player_y += player_speed * delta_time;
+    player_x += player_speed * delta_time * direction_x;
+    player_y += player_speed * delta_time * direction_y;
 
+    if ((player_x < 0 || player_x > width) || (player_y > height || player_y < 0)) {
+        reset_player();
+    }
+    
     last_frame_time = SDL_GetTicks();
 }
 

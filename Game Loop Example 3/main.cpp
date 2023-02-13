@@ -12,12 +12,10 @@ SDL_Event sdl_event;
 bool game_running = false;
 int last_frame_time = 0;
 
+// Player
 int player_x = 0;
 int player_y = 0;
-int player_speed = 850;
-int width = 600;
-int height = 400;
-
+int player_speed = 150;
 
 // SCREEN
 bool graphics_initialization(int width, int height) {
@@ -28,7 +26,7 @@ bool graphics_initialization(int width, int height) {
 
     // Characteristics of the window
     window = SDL_CreateWindow(
-        "Game Loop Variable",
+        "Third Game Loop",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
         width,
