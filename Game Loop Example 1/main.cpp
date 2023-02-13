@@ -1,7 +1,6 @@
 #include <iostream>
 #include <stdbool.h>
 #include <SDL2/SDL.h>
-#include <sol.hpp>
 
 SDL_Window* window;
 SDL_Renderer* renderer;

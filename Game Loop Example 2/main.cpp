@@ -1,7 +1,6 @@
 #include <iostream>
 #include <stdbool.h>
 #include <SDL2/SDL.h>
-#include <sol.hpp>
 
 #define FPS 30
 #define FRAME_TARGET_TIME (1000 / FPS)

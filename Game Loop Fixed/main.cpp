@@ -2,8 +2,10 @@
 #include <stdbool.h>
 #include <SDL2/SDL.h>
 
-#define FPS 60
+#define FPS 10
 #define FRAME_TARGET_TIME (1000 / FPS)
+
+float delta_time = FPS / 1000.0f;
 
 SDL_Window* window;
 SDL_Renderer* renderer;
@@ -13,7 +15,6 @@ int height = 400;
 int width = 600;
 
 bool game_running = false;
-int last_frame_time = 0;
 
 // Player
 int player_x = width / 2;
@@ -100,17 +101,12 @@ void reset_player() {
 
 // UPDATE PLAYER POSITION
 void update() {
-    int delta_time_ms = SDL_GetTicks() - last_frame_time;
-    float delta_time = delta_time_ms / 1000.0f;
-
     player_x += player_speed * delta_time * direction_x;
     player_y += player_speed * delta_time * direction_y;
 
     if ((player_x < 0 || player_x > width) || (player_y > height || player_y < 0)) {
         reset_player();
     }
-    
-    last_frame_time = SDL_GetTicks();
 }
 
 // DRAW THE PIXELS OF THE SCREEN
