@@ -14,7 +14,10 @@ int last_frame_time = 0;
 
 int player_x = 0;
 int player_y = 0;
-int player_speed = 200;
+int player_speed = 850;
+int width = 600;
+int height = 400;
+
 
 // SCREEN
 bool graphics_initialization(int width, int height) {
@@ -85,6 +88,11 @@ void update() {
 
     player_x += player_speed * delta_time;
     player_y += player_speed * delta_time;
+
+    if(player_x < width && player_y < height){
+        player_x = width/2;
+        player_y = height/2;
+    }
 
     last_frame_time = SDL_GetTicks();
 }
